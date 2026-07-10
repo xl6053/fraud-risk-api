@@ -19,10 +19,11 @@ jobs:
       - name: Run tests
         run: |
           python -m pytest
-      - name: build docker image
+      - name: Build Docker image
         run: |
-          docker build -t my-image:test .    
-            - name: Login to Docker Hub
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/fraud-risk-api:latest .
+
+      - name: Login to Docker Hub
         run: |
           echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
